@@ -1,0 +1,6 @@
+da incollare sopra a tutto:
+
+//8Bit Com: D0..D7: 8,9,10,11,4,5,6,7 en=18, cs1=14, cs2=15,di=17,rw=16
+U8GLIB_KS0108_128 u8g(6,7,8,9,10,11,12,13,5,3,4,A1,A0);
+
+configurazione pin basata su PCB (prova su breadboard per ora)
