@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package treno;
 
 import javafx.application.Application;
@@ -13,7 +8,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author robotica
+ * @author Marco Tramontini
  */
 public class Main extends Application {
     
@@ -23,7 +18,15 @@ public class Main extends Application {
         
         Scene scene = new Scene(root);
         stage.setMaximized(true);
+        
+        //stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
+       
+
+        
         stage.setScene(scene);
+        
+        stage.setTitle("I.T.I.S. C. Zuccante");
         stage.show();
     }
 
