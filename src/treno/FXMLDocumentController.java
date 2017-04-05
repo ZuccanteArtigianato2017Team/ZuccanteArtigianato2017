@@ -43,7 +43,7 @@ public class FXMLDocumentController implements Initializable {
 
                 final int fr = r;
                 final int fc = c;
-                                
+                
                 setDragTarget(contenitore, app, false);
                 tabella[r][c] = contenitore;
             }
@@ -64,13 +64,14 @@ public class FXMLDocumentController implements Initializable {
             content.putImage(imgv.getImage());
             db.setContent(content);
 
+            //even
             event.consume();
         });
 
         inizializzaGriglia();
 
         imgv.setOnDragDone((DragEvent event) -> {
-            /* Se l'immagine è stata spostata, cancello l'originale */
+            // Se l'immagine è stata spostata, cancello l'originale
             if (event.getTransferMode() == TransferMode.MOVE) {
                 if (!permanente) {
                     imgv.setImage(null);
@@ -93,8 +94,8 @@ public class FXMLDocumentController implements Initializable {
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasImage()) {
-                app.setFitHeight(CELL_HEIGHT);
-                app.setFitWidth(CELL_WIDTH);
+                app.setFitHeight(griglia.getHeight()/NUMERO_RIGHE_GRIGLIA);
+                app.setFitWidth(griglia.getWidth()/NUMERO_COLONNE_GRIGLIA);
                 app.setImage(db.getImage());
 
                 if (!tavolozza) {
