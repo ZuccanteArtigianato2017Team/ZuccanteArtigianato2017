@@ -1,10 +1,12 @@
 package treno;
 
+import gestioneLim.Percorso;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -12,8 +14,9 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-  
+
 /**
  *
  * @author Marco Tramontini
@@ -21,29 +24,47 @@ import javafx.scene.layout.Pane;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    private ImageView img;
-    @FXML
     private GridPane griglia;
+    
+    private String celle[][];
+    
+    @FXML
+    private HBox tavolozza;
+
+    private Image selezione = null;
 
     protected static final int NUMERO_RIGHE_GRIGLIA = 5;
     protected static final int NUMERO_COLONNE_GRIGLIA = 6;
-    
+
     protected static final int CELL_WIDTH = 228;
     protected static final int CELL_HEIGHT = 100;
+    
+    private Percorso percorso;
+    
 
     private void inizializzaGriglia() {
 
         Node tabella[][] = new Node[NUMERO_RIGHE_GRIGLIA][NUMERO_COLONNE_GRIGLIA];
-     
+
         for (int r = 0; r < NUMERO_RIGHE_GRIGLIA; r++) {
             for (int c = 0; c < NUMERO_COLONNE_GRIGLIA; c++) {
                 Pane contenitore = new Pane();
                 ImageView app = new ImageView();
+                contenitore.setOnMouseClicked(e -> {
+                    if (selezione != null) {
+                        app.setFitHeight(CELL_HEIGHT);
+                        app.setFitWidth(CELL_WIDTH);
+                        app.setImage(selezione);
+
+                        setDragSource(app, false);
+
+                    }
+                });
                 contenitore.getChildren().add(app);
 
                 final int fr = r;
                 final int fc = c;
-                
+
                 setDragTarget(contenitore, app, false);
                 tabella[r][c] = contenitore;
             }
@@ -57,6 +78,8 @@ public class FXMLDocumentController implements Initializable {
 
     private void setDragSource(ImageView imgv, boolean permanente) {
         imgv.setOnDragDetected((MouseEvent event) -> {
+
+
             Dragboard db = imgv.startDragAndDrop(TransferMode.ANY);
 
             // salvo l'immagine della dragboard
@@ -64,14 +87,13 @@ public class FXMLDocumentController implements Initializable {
             content.putImage(imgv.getImage());
             db.setContent(content);
 
-            //even
             event.consume();
         });
 
         inizializzaGriglia();
 
         imgv.setOnDragDone((DragEvent event) -> {
-            // Se l'immagine è stata spostata, cancello l'originale
+            /* Se l'immagine è stata spostata, cancello l'originale */
             if (event.getTransferMode() == TransferMode.MOVE) {
                 if (!permanente) {
                     imgv.setImage(null);
@@ -94,8 +116,8 @@ public class FXMLDocumentController implements Initializable {
             Dragboard db = event.getDragboard();
             boolean success = false;
             if (db.hasImage()) {
-                app.setFitHeight(griglia.getHeight()/NUMERO_RIGHE_GRIGLIA);
-                app.setFitWidth(griglia.getWidth()/NUMERO_COLONNE_GRIGLIA);
+                app.setFitHeight(CELL_HEIGHT);
+                app.setFitWidth(CELL_WIDTH);
                 app.setImage(db.getImage());
 
                 if (!tavolozza) {
@@ -108,13 +130,32 @@ public class FXMLDocumentController implements Initializable {
             event.consume();
         });
     }
+    
+    @FXML
+    private void play(){
+        
+    }
 
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setDragSource(img, true);
-        setDragTarget(img, img, true);
+        percorso = new Percorso(NUMERO_RIGHE_GRIGLIA,NUMERO_COLONNE_GRIGLIA);
+        celle = new String[NUMERO_RIGHE_GRIGLIA][NUMERO_COLONNE_GRIGLIA];
+        tavolozza.getChildren().stream().forEach((x) -> {
+            final ImageView img = (ImageView) x;
+            setDragSource(img, true);
+            setDragTarget(img, img, true);
+            x.setOnMouseClicked(e -> {
+                if (selezione == img.getImage()) {
+                    selezione = null;
+                    img.setScaleX(1);
+                    img.setScaleY(1);
+                } else {
+                    selezione = img.getImage();
+                    img.setScaleX(1.5);
+                    img.setScaleY(1.5);
+                }
+            });
+        });
     }
 
 }

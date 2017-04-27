@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -11,37 +12,56 @@
 <?import javafx.scene.layout.HBox?>
 
 <SplitPane fx:id="splitPane" dividerPositions="0.7989949748743719" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="599.0" prefWidth="825.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treno.FXMLDocumentController">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="429.0" prefWidth="823.0" SplitPane.resizableWithParent="false">
-         <children>
-            <GridPane fx:id="griglia" alignment="CENTER" gridLinesVisible="true" layoutX="14.0" layoutY="14.0" prefHeight="432.0" prefWidth="823.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="108.0" prefWidth="823.0" SplitPane.resizableWithParent="false">
-         <children>
-            <HBox fx:id="tavolozza" layoutX="8.0" layoutY="2.0" prefHeight="Infinity" prefWidth="Infinity">
-               <children>
-                  <ImageView fx:id="img" fitHeight="89.0" fitWidth="108.0" pickOnBounds="true" styleClass="imgTavolozza">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="429.0" prefWidth="823.0" SplitPane.resizableWithParent="false">
+            <children>
+                <GridPane fx:id="griglia" alignment="CENTER" gridLinesVisible="true" layoutX="14.0" layoutY="14.0" prefHeight="432.0" prefWidth="823.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="90.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="90.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="90.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="90.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="90.0" prefHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="108.0" prefWidth="823.0" SplitPane.resizableWithParent="false">
+            <children>
+                <HBox layoutX="8.0" layoutY="2.0" prefHeight="Infinity" prefWidth="Infinity">
+                    <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="100.0" prefWidth="410.0" vbarPolicy="NEVER">
+                            <content>
+                                <HBox fx:id="tavolozza" layoutX="8.0" layoutY="2.0" prefHeight="Infinity" prefWidth="Infinity">
+                                    <children>
+                                        <ImageView fx:id="dritto_or" fitHeight="89.0" fitWidth="108.0" pickOnBounds="true" styleClass="imgTavolozza">
+                                            <image>
+                                                <Image url="@../img/rotaia_dritto.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                            </content>
+                        </ScrollPane>
+                  <ImageView fitHeight="79.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="20.0" top="15.0" />
+                     </HBox.margin>
                      <image>
-                        <Image url="@../img/rotaia_dritto.png" />
+                        <Image url="@../img/play.png" />
                      </image>
                   </ImageView>
-               </children></HBox>
-         </children></AnchorPane>
-  </items>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </items>
 </SplitPane>
